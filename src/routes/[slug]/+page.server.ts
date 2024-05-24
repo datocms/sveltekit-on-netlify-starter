@@ -69,8 +69,8 @@ export const load: PageServerLoad = async function ({ url, fetch, params, setHea
 	const { layoutCacheTags } = await parent();
 
 	setHeaders({
-		'Cache-Control': 'public, max-age=0, must-revalidate',
-		'Cache-Tag': [...new Set([...layoutCacheTags, ...pageCacheTags])].join(',')
+		'Netlify-CDN-Cache-Control': 'public, s-maxage=31536000, must-revalidate',
+		'Netlify-Cache-Tag': [...new Set([...layoutCacheTags, ...pageCacheTags])].join(',')
 	});
 
 	return { currentPost, previousPost, nextPost, pageCacheTags };
