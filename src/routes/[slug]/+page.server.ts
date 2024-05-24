@@ -1,11 +1,6 @@
 import type { PageServerLoad } from './$types';
 
-import { dontExpireAndAllowRegeneration } from '$lib/incremental-static-regeneration';
 import { executeQuery } from '$lib/fetch-contents';
-
-export const config = {
-	isr: dontExpireAndAllowRegeneration
-};
 
 const CURRENT_POST_QUERY = `
   query CurrentPost($slug: String) {

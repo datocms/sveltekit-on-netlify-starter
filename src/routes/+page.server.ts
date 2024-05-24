@@ -1,12 +1,6 @@
 import { executeQuery } from '$lib/fetch-contents';
 
-import { dontExpireAndAllowRegeneration } from '$lib/incremental-static-regeneration';
-
 import type { PageServerLoad } from './$types';
-
-export const config = {
-	isr: dontExpireAndAllowRegeneration
-};
 
 const QUERY = `
   {
