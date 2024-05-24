@@ -23,7 +23,10 @@ export const load: PageServerLoad = async function ({ url, fetch, setHeaders, pa
 
 	const { layoutCacheTags } = await parent();
 
-	setHeaders({ 'Cache-Tag': [...new Set([...layoutCacheTags, ...pageCacheTags])].join(',') });
+	setHeaders({
+		'Cache-Control': 'public, max-age=0, must-revalidate',
+		'Cache-Tag': [...new Set([...layoutCacheTags, ...pageCacheTags])].join(',')
+	});
 
 	return { allPosts, pageCacheTags };
 };
