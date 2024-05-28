@@ -3,7 +3,7 @@ import { error, json } from '@sveltejs/kit';
 import { WEBHOOK_TOKEN } from '$env/static/private';
 
 import { type CacheTag } from '$lib/cache-tags';
-import { invalidateCacheTags } from '$lib/netlity-invalidation-strategy';
+import { invalidateCacheTags } from '$lib/netlify-invalidation-strategy';
 
 import type { RequestHandler } from './$types';
 
