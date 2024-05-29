@@ -32,7 +32,7 @@ export const load: PageServerLoad = async function ({ url, fetch, setHeaders, pa
 	const etag = createHash('md5').update(allTagsAsString).digest('hex');
 
 	setHeaders({
-		'Netlify-CDN-Cache-Control': 'public, s-maxage=31536000, must-revalidate',
+		'Netlify-CDN-Cache-Control': 'public, max-age=31536000, s-maxage=31536000, must-revalidate',
 		'Netlify-Cache-Tag': allTagsAsString,
 		ETag: etag
 	});
