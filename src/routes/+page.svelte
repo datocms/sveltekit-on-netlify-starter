@@ -5,7 +5,7 @@
 
 	export let data;
 
-	$: ({ allPosts, layoutCacheTags, pageCacheTags } = data);
+	$: ({ allPosts, layoutCacheTags, pageCacheTags, etag } = data);
 </script>
 
 <h1>Welcome to SvelteKit</h1>
@@ -31,5 +31,7 @@
 		</code>
 	</p>
 
+	<p>ETag: {etag}</p>
+	
 	<p>This page has been generated on {PAGE_GENERATED_ON}</p>
 </footer>

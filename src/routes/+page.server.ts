@@ -1,3 +1,5 @@
+import { createHash } from 'crypto';
+
 import { executeQuery } from '$lib/fetch-contents';
 
 import type { PageServerLoad } from './$types';
@@ -23,10 +25,17 @@ export const load: PageServerLoad = async function ({ url, fetch, setHeaders, pa
 
 	const { layoutCacheTags } = await parent();
 
+	const allTagsAsString = [...new Set([...layoutCacheTags, ...pageCacheTags])]
+		.sort((a, b) => (a > b ? 1 : -1))
+		.join(',');
+
+	const etag = createHash('md5').update(allTagsAsString).digest('hex');
+
 	setHeaders({
 		'Netlify-CDN-Cache-Control': 'public, s-maxage=31536000, must-revalidate',
-		'Netlify-Cache-Tag': [...new Set([...layoutCacheTags, ...pageCacheTags])].join(',')
+		'Netlify-Cache-Tag': allTagsAsString,
+		ETag: etag
 	});
 
-	return { allPosts, pageCacheTags };
+	return { allPosts, pageCacheTags, etag };
 };
